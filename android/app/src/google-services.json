@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "622741006656",
+    "project_id": "herppro-76ded",
+    "storage_bucket": "herppro-76ded.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622741006656:android:bba708be39e9daadf8f2a5",
+        "android_client_info": {
+          "package_name": "com.herppro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622741006656-u6d801a7m48f1olhe4l4lcpue3of0qn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.herppro",
+            "certificate_hash": "ee42ce79f19a4a703aaa1375a7ab2eb8538cd458"
+          }
+        },
+        {
+          "client_id": "622741006656-t5o9f582ajj7vn90u3h2hq79g5ujv42l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJK7dcT5QtOHxNJ6gX0xl2YqoT7c6s50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622741006656-t5o9f582ajj7vn90u3h2hq79g5ujv42l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "622741006656-5sosfbp9av6cvrl7feha6rodunirs41n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.herppro"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
