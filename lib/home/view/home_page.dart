@@ -1,32 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herppro/auth/cubit/auth_cubit.dart';
+import 'package:herppro/main.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select((AuthCubit cubit) => cubit.state.user);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
-        actions: <Widget>[
+        title: const Text('HerpPro'),
+        actions: [
           IconButton(
-            key: const Key('homePage_logout_iconButton'),
-            icon: const Icon(Icons.exit_to_app),
+            icon: Icon(themeProvider.themeMode == ThemeMode.dark
+                ? Icons.light_mode
+                : Icons.dark_mode),
+            onPressed: () => themeProvider.toggleTheme(),
+            tooltip: 'Toggle Theme',
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
             onPressed: () => context.read<AuthCubit>().logOut(),
-          )
+            tooltip: 'Logout',
+          ),
         ],
       ),
-      body: Align(
-        alignment: const Alignment(0, -1 / 3),
+      body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/images/logo.png', height: 150),
-            const SizedBox(height: 4),
-            Text(user?.email ?? '', style: const TextStyle(fontSize: 20)),
+            Text(
+              'Welcome!',
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
           ],
         ),
       ),

@@ -1,5 +1,5 @@
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herppro/auth/repository/auth_repository.dart';
 
 part 'login_state.dart';
@@ -7,7 +7,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository _authRepository;
 
-  LoginCubit(this._authRepository) : super(LoginState.initial());
+  LoginCubit(this._authRepository) : super(const LoginState());
 
   void emailChanged(String value) {
     emit(state.copyWith(email: value, status: LoginStatus.initial));
@@ -26,8 +26,10 @@ class LoginCubit extends Cubit<LoginState> {
         password: state.password,
       );
       emit(state.copyWith(status: LoginStatus.success));
-    } catch (_) {
-      emit(state.copyWith(status: LoginStatus.error));
+    } on Exception catch (e) {
+      emit(
+        state.copyWith(status: LoginStatus.error, errorMessage: e.toString()),
+      );
     }
   }
 }

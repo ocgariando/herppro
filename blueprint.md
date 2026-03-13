@@ -1,38 +1,30 @@
-
-# Project Blueprint
+# HerpPro Blueprint
 
 ## Overview
 
-This document outlines the plan for creating a Flutter application with Firebase authentication, using flutter_bloc for state management.
+This document outlines the architecture and implementation plan for HerpPro, a Flutter application designed for reptile monitoring. The app will feature user authentication, reptile profile management, and real-time sensor data visualization.
 
-## Current Task: Implement Authentication
+## Style and Design
 
-### Plan
+- **Theme:** Modern, clean, and intuitive Material 3 design.
+- **Color Palette:** A mix of natural tones (greens, browns) and tech-inspired accents (blues, grays).
+- **Typography:** Clear and readable fonts, with a focus on scannability.
+- **Iconography:** Material Design icons for consistency.
 
-1.  **Add Dependencies:**
-    *   `firebase_core`: To initialize Firebase.
-    *   `firebase_auth`: For authentication services.
-    *   `flutter_bloc`: For state management.
-    *   `equatable`: To compare objects.
-    *   `go_router`: For navigation.
+## Features
 
-2.  **Initialize Firebase:**
-    *   Ensure Firebase is initialized in `lib/main.dart`.
+### Implemented
 
-3.  **Create Authentication Flow:**
-    *   Implement an `AuthRepository` to handle `FirebaseAuth` interactions.
-    *   Create an `AuthCubit` to manage the authentication state.
-    *   Create a `LoginCubit` to manage the login form state.
-    *   Create a `RegistrationCubit` to manage the registration form state.
+- **User Authentication:** Email and password registration and login.
+- **Navigation:** `go_router` for declarative routing and authentication-based redirection.
+- **State Management:** `flutter_bloc` for predictable state management.
 
-4.  **Create UI Screens:**
-    *   `SplashPage`: To show while checking the authentication state.
-    *   `LoginPage`: For users to sign in.
-    *   `RegistrationPage`: For users to create a new account.
-    *   `HomePage`: The main screen after a user is authenticated.
+### Current Plan
 
-5.  **Set up Navigation:**
-    *   Use `go_router` to manage navigation between screens based on the authentication state.
+- **UI Implementation:** Build the user interface for the home, login, registration, and splash screens.
 
-6.  **Update `main.dart`:**
-    *   Wrap the app in `RepositoryProvider` and `BlocProvider` to provide the `AuthRepository` and `AuthCubit` to the widget tree.
+### Future
+
+- **Reptile Profiles:** Allow users to create and manage profiles for their reptiles.
+- **Sensor Integration:** Connect to and display data from environmental sensors.
+- **Notifications:** Alert users to important events, such as temperature fluctuations.

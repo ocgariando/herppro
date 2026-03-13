@@ -41,16 +41,29 @@ class AppRouter {
       ),
     ],
     redirect: (BuildContext context, GoRouterState state) {
-      final bool loggedIn = authCubit.state.status == AuthStatus.authenticated;
-      final bool loggingIn = state.matchedLocation == '/login';
-      final bool registering = state.matchedLocation == '/registration';
+      final authStatus = authCubit.state.status;
+      final location = state.matchedLocation;
 
-      if (!loggedIn && !loggingIn && !registering) {
-        return '/login';
-      } 
+      if (authStatus == AuthStatus.unknown) {
+        return '/splash';
+      }
 
-      if(loggedIn && (loggingIn || registering)){
-        return '/';
+      final loggedIn = authStatus == AuthStatus.authenticated;
+      final onAuthRoutes = location == '/login' || location == '/registration';
+      final onSplash = location == '/splash';
+
+      if (loggedIn) {
+        if (onAuthRoutes || onSplash) {
+          return '/';
+        }
+        return null;
+      }
+
+      if (!loggedIn) {
+        if (!onAuthRoutes) {
+          return '/login';
+        }
+        return null;
       }
 
       return null;
@@ -63,8 +76,8 @@ class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
-          (dynamic _) => notifyListeners(),
-        );
+      (dynamic _) => notifyListeners(),
+    );
   }
 
   late final StreamSubscription<dynamic> _subscription;

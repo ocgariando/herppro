@@ -11,9 +11,8 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
   late StreamSubscription<User?> _userSubscription;
 
-  AuthCubit({required AuthRepository authRepository})
-      : _authRepository = authRepository,
-        super(const AuthState.unknown()) {
+  AuthCubit({required AuthRepository authRepository}) : _authRepository = authRepository,
+  super(const AuthState.unknown()) {
     _userSubscription = _authRepository.user.listen((user) {
       if (user != null) {
         emit(AuthState.authenticated(user));
@@ -23,8 +22,8 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  Future<void> logOut() async {
-    await _authRepository.logOut();
+  void logOut() {
+    _authRepository.logOut();
   }
 
   @override

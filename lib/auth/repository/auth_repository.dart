@@ -4,14 +4,11 @@ class AuthRepository {
   final FirebaseAuth _firebaseAuth;
 
   AuthRepository({FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+    : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   Stream<User?> get user => _firebaseAuth.authStateChanges();
 
-  Future<void> signUp({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signUp({required String email, required String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
