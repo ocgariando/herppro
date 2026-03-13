@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:herppro/auth/cubit/auth_cubit.dart';
 import 'package:herppro/auth/repository/auth_repository.dart';
 import 'package:herppro/router/app_router.dart';
+import 'package:herppro/splash/view/splash_page.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -95,12 +96,31 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeProvider(),
           child: Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
-              return MaterialApp.router(
-                routerConfig: AppRouter(context.read<AuthCubit>()).router,
-                title: 'HerpPro Montitoring',
-                theme: lightTheme,
-                darkTheme: darkTheme,
-                themeMode: themeProvider.themeMode,
+              return BlocListener<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state.status == AuthStatus.authenticated) {
+                    router.go('/');
+                  } else if (state.status == AuthStatus.unauthenticated) {
+                    router.go('/login');
+                  }
+                },
+                child: MaterialApp.router(
+                  routerConfig: router,
+                  title: 'HerpPro Montitoring',
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  themeMode: themeProvider.themeMode,
+                  builder: (context, child) {
+                    return BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        if (state.status == AuthStatus.unknown) {
+                          return const SplashPage();
+                        }
+                        return child!;
+                      },
+                    );
+                  },
+                ),
               );
             },
           ),
